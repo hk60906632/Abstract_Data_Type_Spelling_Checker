@@ -1,0 +1,87 @@
+I marked this largely around Christmas, but then got a series of colds/flu
+& had to come back to it this week. Apologies for the delay. I used my
+normal approach of marking into "bins" and then giving each bin a mark,
+then marking individually again, checking the mark is sensible.
+
+Things I looked at (for both hsh.c and bst.c) included :
+
+Did your code compile ?
+How long it took to  execute.
+Did it valgrind cleanly ?
+Did it run with a different main(), one using much larger words?
+Did it need me to make adjustments to #includes to get it to compile with my Makefile (typically <stdio.h> and <stdlib.h>) ?
+
+I've also, sometimes, given a written comment at the end.
+
+
+General Feedback
+================
+
+The initial hashing size can't be large - this is an ADT that could be used
+in many different situations. You can't assume it needs 9000000 entries !
+
+If you used a linked list (maybe during hashing), could this have been
+an ADT in its own right ?
+
+If hashing is very slow, might be a bug, or might simply be a poor
+hashing function causing everything to collide in the same cell.
+
+Some people used a 26^n approach to hashing where n=length of string. I
+think this overflows for large strings & is hugely computationally
+intensive.
+
+Some people used is_prime() or equivalent. Generally I've ignored Magic
+Numbers in these, such as for(i=3; i< ...) etc...
+
+Many used #defines that were common to both .c files (e.g. what to do on
+error, dealing with alloc'ing arrays etc.) - in this case, it would have
+made more sense to put these in a separate .h file and simply #included
+it in both source files.
+
+Putting a magic number in as hex e.g. (s & 0x7FFF) doesn't stop it being
+a Magic Number :-) !
+
+Most people got their BST/Hash to run in roughly 0.3-0.5s on a virtual
+machine for "Heart of Darkness". If yours was considerably quicker
+(without cheating e.g. using a massive hash table to start with!) well
+done. If it was very much slower, this is often due to a poor hash
+function, a bug, or simply a misunderstanding of the underlying
+algorithm. Some clearly had gone O(n*n) or worse.
+
+Individual Feedback
+===================
+
+Feedback for bst.c
+Feedback for hsh.c
+
+Initial Hash Table Size (if interesting) : 79 (?)
+
+Compiling bst.c
+Compiled splbst.c : OK
+Executing splbst : gravesend marlow deptford erith ravenna fresleven morituri salutant inkstains calme gran bassam popo ve kurtz zanzibaris hadn mache icthyosaurus instalments sidespring winchesters mustn tambov shuyten sandalwise mistah flauntings 
+
+Time splbst 0.34s
+
+Valgrind splbst_d OK
+
+bst.c large MAXWORD test Passed gracefully
+
+bst.c Compiled without manually inserting #include <stdio.h> etc ? : Passed
+
+Compiling hsh.c
+Compiled splhsh.c : OK
+Executing splhsh : gravesend marlow deptford erith ravenna fresleven morituri salutant inkstains calme gran bassam popo ve kurtz zanzibaris hadn mache icthyosaurus instalments sidespring winchesters mustn tambov shuyten sandalwise mistah flauntings 
+
+Time splhsh 0.28s
+
+Valgrind splhsh_d OK
+
+hsh.c large MAXWORD test Passed gracefully
+
+hsh.c Compiled without manually inserting #include <stdio.h> etc ? : Passed
+
+Initial Mark = 65
+
+Final Mark = 68
+
+[Final Comments (if any) ]  To have a hahsing ADT that always starts with a table of size 79 is not very general - it's too big ? Nice coding.
